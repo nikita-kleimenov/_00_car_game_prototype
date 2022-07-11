@@ -11,6 +11,7 @@ public class CarDetection : MonoBehaviour
         _loosePanel.SetActive(false);
     }
     private void OnCollisionEnter(Collision other) {
+        Debug.Log("CRACH");
         StartToPlay carWheels = GameObject.FindObjectOfType<StartToPlay>();
         foreach (var wheel in carWheels.CarWheels)
         {

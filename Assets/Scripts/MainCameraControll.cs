@@ -6,18 +6,22 @@ public class MainCameraControll : MonoBehaviour
 {
 
     [SerializeField] private Transform _carPosition;
-    private float _speed = 10f;
+    public float speed = 10f;
+    public ChangeCameraView changeCamera;
 
+    public Vector3 offset;
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 offset = new Vector3(0, 11f, -5f);
         var targetPosition = _carPosition.TransformPoint(offset);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, _speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
         var direction = _carPosition.position - transform.position;
         var rotation = Quaternion.LookRotation(direction, Vector3.up);
-
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, _speed * Time.deltaTime);
+        if(changeCamera.isCameraRotate)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, speed * Time.deltaTime);
+        }
+            
         
     }
 }
