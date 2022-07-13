@@ -5,13 +5,22 @@ using UnityEngine;
 public class CarDetection : MonoBehaviour
 {
     [SerializeField] private GameObject _loosePanel;
-
+    public float ExplosionForce = 500f;
+    [SerializeField] private Vector3 directionOfImpact;
+    [SerializeField] private float _speed;
 
     private void Awake() {
         _loosePanel.SetActive(false);
     }
     private void OnCollisionEnter(Collision other) {
-        Debug.Log("CRACH");
+        if(other.gameObject.GetComponent<Rigidbody>()){
+            Camera.main.GetComponent<MainCameraControll>().offset = Vector3.Lerp(Camera.main.GetComponent<MainCameraControll>().offset, new Vector3(0, 10, 10), (Time.deltaTime * _speed));
+            Time.timeScale = 0.4f;
+            ActivateRagdoll ragdoll = other.gameObject.GetComponentInParent<ActivateRagdoll>();
+            ragdoll.IsActiveRagdoll = true;
+            other.gameObject.GetComponent<Rigidbody>().AddForce(directionOfImpact * ExplosionForce, ForceMode.Impulse);
+            StartCoroutine(SlowMotion());
+        }
         StartToPlay carWheels = GameObject.FindObjectOfType<StartToPlay>();
         foreach (var wheel in carWheels.CarWheels)
         {
@@ -20,11 +29,15 @@ public class CarDetection : MonoBehaviour
         StartCoroutine(ShowLoosePanel());
     }
 
-    IEnumerator ShowLoosePanel(){
+    IEnumerator SlowMotion(){
         yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 1f;
+    }
+    IEnumerator ShowLoosePanel(){
+        yield return new WaitForSeconds(5f);
         _loosePanel.SetActive(true);
         _loosePanel.GetComponent<Animation>().Play("LoosePanelAnim");
-        yield return new WaitForSeconds (0.2f);
+        yield return new WaitForSeconds (5f);
         _loosePanel.GetComponent<Animation>().enabled = false;
     }
 }

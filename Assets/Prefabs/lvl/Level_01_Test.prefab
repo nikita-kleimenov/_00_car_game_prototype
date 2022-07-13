@@ -1382,11 +1382,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7327840634056800928, guid: c4c2a96c44bfec8478602d650d789ce4, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.7071067
       objectReference: {fileID: 0}
     - target: {fileID: 7327840634056800928, guid: c4c2a96c44bfec8478602d650d789ce4, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 7327840634056800928, guid: c4c2a96c44bfec8478602d650d789ce4, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1394,7 +1394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7327840634056800928, guid: c4c2a96c44bfec8478602d650d789ce4, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.000000021825496
       objectReference: {fileID: 0}
     - target: {fileID: 7327840634056800928, guid: c4c2a96c44bfec8478602d650d789ce4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3771,7 +3771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraControll: {fileID: 8533638857124153366}
   isMainCameraControlActive: 1
-  isCameraRotate: 0
+  isCameraRotate: 1
 --- !u!114 &8533638857124153366
 MonoBehaviour:
   m_ObjectHideFlags: 0

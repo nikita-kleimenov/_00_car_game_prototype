@@ -7,8 +7,12 @@ public class WheelsControls : MonoBehaviour
 {
     public WheelCollider WheelColliderFL;
     public WheelCollider WheelColliderFR;
+     public WheelCollider WheelColliderBL;
+    public WheelCollider WheelColliderBR;
     [SerializeField] private Transform _wheelModelFR;
     [SerializeField] private Transform _wheelModelFL;
+    [SerializeField] private Transform _wheelModelBR;
+    [SerializeField] private Transform _wheelModelBL;
     [SerializeField] private Slider _sliderControl;
     [SerializeField] private float _maxAngle = 45f;
     [SerializeField] private float _sensitivity;
@@ -39,6 +43,8 @@ public class WheelsControls : MonoBehaviour
         }
         RotateWheel(WheelColliderFL, _wheelModelFL);
         RotateWheel(WheelColliderFR, _wheelModelFR);
+        RotateWheel(WheelColliderBL, _wheelModelBL);
+        RotateWheel(WheelColliderBR, _wheelModelBR);
     }
 
     private void RotateWheel(WheelCollider collider, Transform transform){
