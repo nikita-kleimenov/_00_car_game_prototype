@@ -14,11 +14,10 @@ public class CarDetection : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.GetComponent<Rigidbody>()){
-            Camera.main.GetComponent<MainCameraControll>().offset = Vector3.Lerp(Camera.main.GetComponent<MainCameraControll>().offset, new Vector3(0, 10, 10), (Time.deltaTime * _speed));
             Time.timeScale = 0.4f;
             ActivateRagdoll ragdoll = other.gameObject.GetComponentInParent<ActivateRagdoll>();
             ragdoll.IsActiveRagdoll = true;
-            other.gameObject.GetComponent<Rigidbody>().AddForce(directionOfImpact * ExplosionForce, ForceMode.Impulse);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(directionOfImpact * ExplosionForce + transform.forward, ForceMode.Impulse);
             StartCoroutine(SlowMotion());
         }
         StartToPlay carWheels = GameObject.FindObjectOfType<StartToPlay>();
