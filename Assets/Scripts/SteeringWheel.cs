@@ -11,12 +11,12 @@ public class SteeringWheel : MonoBehaviour, IDragHandler, IPointerDownHandler, I
     public float WheelAngle = 0f;
     public float LastWheelAngle = 0f;
     private Vector2 _center;
-    public float MaxSteerAngle = 45f;
     public float ReleaseSpeed = 300f;
     public float OutPut;
-
+    float MaxSteerAngle;
 
     private void Update() {
+        MaxSteerAngle = FindObjectOfType<GameSettings>().SteeringWheelMaxAgnle;
         if(!_wheelBeingHeld && WheelAngle != 0){
            float deltaAngle = ReleaseSpeed * Time.deltaTime;
            if(Mathf.Abs(deltaAngle) > Mathf.Abs(WheelAngle)){

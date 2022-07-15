@@ -14,7 +14,7 @@ public class WheelsControls : MonoBehaviour
     [SerializeField] private Transform _wheelModelBR;
     [SerializeField] private Transform _wheelModelBL;
     [SerializeField] private Slider _sliderControl;
-    [SerializeField] private float _maxAngle = 45f;
+    // [SerializeField] private float _maxAngle = 45f;
     [SerializeField] private float _sensitivity;
     public SteeringWheel steeringWheel;
     public GameObject CenterOfSteeringWheel;
@@ -26,20 +26,21 @@ public class WheelsControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float maxAngle = FindObjectOfType<GameSettings>().MaxCarWheelsAngle;
         WheelColliderFL.steerAngle = steeringWheel.WheelAngle;
         SteeringWheelModel.localEulerAngles = new Vector3(0, steeringWheel.WheelAngle, 0f);
-        if(WheelColliderFL.steerAngle > _maxAngle){
-            WheelColliderFL.steerAngle = _maxAngle;
+        if(WheelColliderFL.steerAngle > maxAngle){
+            WheelColliderFL.steerAngle = maxAngle;
         }
-        else if(WheelColliderFL.steerAngle < -_maxAngle){
-            WheelColliderFL.steerAngle = -_maxAngle;
+        else if(WheelColliderFL.steerAngle < -maxAngle){
+            WheelColliderFL.steerAngle = -maxAngle;
         }
         WheelColliderFR.steerAngle = steeringWheel.WheelAngle;
-        if(WheelColliderFR.steerAngle > _maxAngle){
-            WheelColliderFR.steerAngle = _maxAngle;
+        if(WheelColliderFR.steerAngle > maxAngle){
+            WheelColliderFR.steerAngle = maxAngle;
         }
-         else if(WheelColliderFR.steerAngle < -_maxAngle){
-            WheelColliderFR.steerAngle = -_maxAngle;
+         else if(WheelColliderFR.steerAngle < -maxAngle){
+            WheelColliderFR.steerAngle = -maxAngle;
         }
         RotateWheel(WheelColliderFL, _wheelModelFL);
         RotateWheel(WheelColliderFR, _wheelModelFR);

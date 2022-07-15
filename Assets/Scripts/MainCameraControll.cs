@@ -10,11 +10,10 @@ public class MainCameraControll : MonoBehaviour
     
     public float speed = 10f;
     public ChangeCameraView changeCamera;
-
-    public Vector3 offset;
     // Update is called once per frame
     void LateUpdate()
     {
+        Vector3 offset = FindObjectOfType<GameSettings>().CameraOffsetControll;
         var targetPosition = _carPosition.TransformPoint(offset);
         // transform.position = Vector3.Lerp(transform.position, targetPosition, speed * Time.deltaTime);
         transform.position = _carPosition.position + offset;

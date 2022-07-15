@@ -12,7 +12,6 @@ public class StartToPlay : MonoBehaviour
    
 
     public List<WheelCollider> CarWheels = new List<WheelCollider>();
-    [SerializeField] private float _forceTorqueOfWheel;
     [SerializeField] private StartBtn _startBtn;
 
     private void Start() {
@@ -23,7 +22,7 @@ public class StartToPlay : MonoBehaviour
     {
         foreach (var wheel in CarWheels)
         {
-            wheel.motorTorque = _forceTorqueOfWheel;
+            wheel.motorTorque = FindObjectOfType<GameSettings>().CarSpeed;
         }
         _startBtn.enabled = false;
     }
