@@ -14,7 +14,6 @@ public class WheelsControls : MonoBehaviour
     [SerializeField] private Transform _wheelModelBR;
     [SerializeField] private Transform _wheelModelBL;
     [SerializeField] private Slider _sliderControl;
-    // [SerializeField] private float _maxAngle = 45f;
     [SerializeField] private float _sensitivity;
     public SteeringWheel steeringWheel;
     public GameObject CenterOfSteeringWheel;
@@ -24,18 +23,20 @@ public class WheelsControls : MonoBehaviour
     
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
+        float currentAngle = FindObjectOfType<TESTCCC>().currenrtAngle;
         float maxAngle = FindObjectOfType<GameSettings>().MaxCarWheelsAngle;
-        WheelColliderFL.steerAngle = steeringWheel.WheelAngle;
-        SteeringWheelModel.localEulerAngles = new Vector3(0, steeringWheel.WheelAngle, 0f);
+        float maxSpeed = FindObjectOfType<GameSettings>().MaxVelosityCar;
+        WheelColliderFL.steerAngle = currentAngle;
+        // SteeringWheelModel.localEulerAngles = new Vector3(0, steeringWheel.WheelAngle, 0f);
         if(WheelColliderFL.steerAngle > maxAngle){
             WheelColliderFL.steerAngle = maxAngle;
         }
         else if(WheelColliderFL.steerAngle < -maxAngle){
             WheelColliderFL.steerAngle = -maxAngle;
         }
-        WheelColliderFR.steerAngle = steeringWheel.WheelAngle;
+        WheelColliderFR.steerAngle = currentAngle;
         if(WheelColliderFR.steerAngle > maxAngle){
             WheelColliderFR.steerAngle = maxAngle;
         }
@@ -46,6 +47,10 @@ public class WheelsControls : MonoBehaviour
         RotateWheel(WheelColliderFR, _wheelModelFR);
         RotateWheel(WheelColliderBL, _wheelModelBL);
         RotateWheel(WheelColliderBR, _wheelModelBR);
+        if(gameObject.GetComponent<Rigidbody>().velocity.magnitude >= maxSpeed){
+            gameObject.GetComponent<Rigidbody>().velocity = gameObject.GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
+        }
+        
     }
 
     private void RotateWheel(WheelCollider collider, Transform transform){

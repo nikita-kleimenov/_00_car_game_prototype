@@ -8,4 +8,6 @@ public class GameSettings:MonoBehaviour
    public float MaxCarWheelsAngle;
    public Vector3 CameraOffsetControll;
    public float SteeringWheelMaxAgnle;
+   public float MaxVelosityCar;
 }
+
